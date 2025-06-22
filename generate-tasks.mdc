@@ -1,0 +1,85 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+# Rule: Generating a Task List from an Optimized PRD
+## Goal
+To guide an AI assistant in creating a focused, step-by-step task list in Markdown format based on a PRD that has been simplified using Musk's 5-step design methodology. The task list should guide a developer through rapid implementation of only essential features.
+
+## Context
+This rule assumes the input PRD has been processed through Musk's design methodology and contains:
+- **Core Problem Statement:** Single, validated user problem
+- **Essential User Story:** One primary user journey  
+- **Minimal Functional Requirements:** 3-5 essential features only
+- **Simple Success Metric:** One primary user value metric
+- **Implementation Plan:** Fast iteration approach with proven technologies
+- **Automation Scope:** Clear boundaries between automated and manual processes
+
+## Output
+- **Format:** Markdown (`.md`)
+- **Location:** `/tasks/`
+- **Filename:** `tasks-[simplified-prd-name].md` (e.g., `tasks-prd-user-profile-simplified.md`)
+
+## Process
+1. **Receive Simplified PRD Reference:** The user points the AI to a specific simplified PRD file
+2. **Analyze Simplified PRD:** Focus on the 3-5 essential features, core user problem, and performance targets
+3. **Phase 1: Generate Essential Parent Tasks:** Based on the minimal functional requirements, create 2-4 high-level tasks that directly enable user success. Prioritize tasks by:
+   - Direct impact on core user problem
+   - Implementation speed (proven technologies first)
+   - Critical path for essential user story
+   Present these tasks to the user and inform: "I have generated the essential tasks based on the simplified PRD. These focus on the core user problem and fastest implementation path. Ready to generate the sub-tasks? Respond with 'Go' to proceed."
+4. **Wait for Confirmation:** Pause and wait for the user to respond with "Go"
+5. **Phase 2: Generate Focused Sub-Tasks:** Break down each parent task into actionable sub-tasks that:
+   - Use existing patterns/components where possible
+   - Minimize custom development
+   - Enable rapid user feedback
+   - Support the defined performance targets
+6. **Identify Essential Files:** List only files necessary for the 3-5 core features, emphasizing:
+   - Proven, simple technologies
+   - Existing component reuse
+   - Minimal dependencies
+7. **Generate Final Output:** Combine into the final structure with implementation priorities
+8. **Save Task List:** Save in `/tasks/` directory as `tasks-[simplified-prd-name].md`
+
+## Output Format
+The generated task list *must* follow this structure:
+
+```markdown
+## Core User Problem
+[Single problem statement from simplified PRD]
+
+## Success Metric  
+[Primary user value metric to track]
+
+## Performance Targets
+[Speed requirements for user tasks]
+
+## Relevant Files
+- `path/to/essential/file1.ts` - Core feature implementation (existing pattern reuse)
+- `path/to/file1.test.ts` - Essential unit tests only
+- `path/to/minimal/api.ts` - Simple API endpoint (proven technology)  
+- `path/to/minimal/api.test.ts` - API integration tests
+- `components/existing/Component.tsx` - Reused existing component (modification only)
+
+### Implementation Notes
+- Prioritize speed: Use existing components and proven patterns
+- Focus on essential user journey only
+- Implement automation scope as defined in simplified PRD
+- Test only core functionality that enables user success
+- Use `npx jest [test-file]` for targeted testing of essential features
+
+## Essential Tasks (Implementation Priority Order)
+- [ ] 1.0 [Essential Feature 1 - Highest User Value]
+  - [ ] 1.1 [Minimal sub-task using existing patterns]
+  - [ ] 1.2 [Core functionality only]
+- [ ] 2.0 [Essential Feature 2 - Critical Path]  
+  - [ ] 2.1 [Simple implementation approach]
+- [ ] 3.0 [Essential Feature 3 - User Success Enabler]
+  - [ ] 3.1 [Proven technology implementation]
+
+## Future Iterations (Post-Feedback)
+- [ ] Monitor primary success metric
+- [ ] Collect user feedback on core problem resolution  
+- [ ] Consider re-adding features only if user data validates need
